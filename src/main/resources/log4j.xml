@@ -10,6 +10,9 @@
     <category name="org.springframework">
         <level value="warn" />
     </category>
+    <category name="org.apache.camel">
+        <level value="warn" />
+    </category>
     <root>
         <level value="DEBUG" />
         <appender-ref ref="console" />

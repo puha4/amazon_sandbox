@@ -10,11 +10,10 @@ public class Item {
     private String id;
     private String code;
 
-    public Item() {
-    }
-
-    public Item(String code) {
-        this.code = code;
+    public static Item create(String code) {
+        Item item = new Item();
+        item.code = code;
+        return item;
     }
 
     public String getId() {
@@ -39,5 +38,24 @@ public class Item {
                 "id='" + id + '\'' +
                 ", code='" + code + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Item item = (Item) o;
+        return id.equals(item.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }
