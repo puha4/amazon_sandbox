@@ -1,4 +1,4 @@
-package com.projektcs.amazon.sandbox.test;
+package com.projektcs.amazon.sandbox.camel.process;
 
 import com.projektcs.amazon.sandbox.model.Item;
 import com.projektcs.amazon.sandbox.repository.ItemRepository;
@@ -9,18 +9,23 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Deque;
+
 @Component
-public class TestBean implements Processor {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TestBean.class);
+public class ItemSaveProcessor implements Processor {
+    private static final Logger LOGGER = LoggerFactory.getLogger(XMLParserProcessor.class);
 
     private ItemRepository repository;
 
     @Override
+    @SuppressWarnings("unchecked")
     public void process(Exchange exchange) throws Exception {
-        LOGGER.info("Test Bean");
-        Item item = Item.create(exchange.getIn().getBody(String.class));
-        repository.save(item);
-        exchange.getIn().setBody(item);
+        final Deque<Item> items = exchange.getIn().getBody(Deque.class);
+        LOGGER.info("Count - " + items.size());
+
+        repository.insert(items);
+
+        exchange.getIn().setBody(items.getFirst().getCode());
     }
 
     @Autowired

@@ -1,6 +1,6 @@
 package com.projektcs.amazon.sandbox.config;
 
-import com.projektcs.amazon.sandbox.test.TestBean;
+import com.projektcs.amazon.sandbox.camel.process.XMLParserProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationConfig {
 
     @Bean
-    public TestBean testBean() {
-        return new TestBean();
+    public XMLParserProcessor xmlParserProcessor() {
+        return new XMLParserProcessor();
     }
 }
