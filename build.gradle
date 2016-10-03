@@ -56,11 +56,9 @@ dependencies {
     compile "org.slf4j:slf4j-api:$slf4jApiVersion"
 }
 
-
-tasks.withType(FindBugs) {
+findbugsMain {
     reports {
-        xml.enabled false
-        html.enabled true
-        html.stylesheet resources.text.fromFile('config/xsl/findbugs-custom.xsl')
+        xml.enabled = false
+        html.enabled = true
     }
 }
